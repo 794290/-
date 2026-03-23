@@ -1,22 +1,129 @@
 <!DOCTYPE html>
 <html>
+<head>
+<meta charset="UTF-8">
+<title>モテ度診断</title>
+
+<style>
+body {
+  font-family: sans-serif;
+  text-align: center;
+  background: linear-gradient(135deg, #1e1e2f, #3a3a5a);
+  color: white;
+  padding: 30px;
+}
+
+h1 {
+  font-size: 28px;
+}
+
+#box {
+  background: rgba(255,255,255,0.1);
+  padding: 20px;
+  border-radius: 15px;
+  margin-top: 20px;
+}
+
+button {
+  padding: 15px 30px;
+  margin: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.yes {
+  background: #4CAF50;
+  color: white;
+}
+
+.no {
+  background: #f44336;
+  color: white;
+}
+
+#result {
+  font-size: 22px;
+  margin-top: 20px;
+}
+
+#character {
+  margin-top: 20px;
+  font-size: 18px;
+}
+</style>
+
+</head>
+
 <body>
 
-<h1>モテ度診断</h1>
-<button onclick="check()">診断する</button>
-<p id="result"></p>
+<h1>⚡禁断のモテ度診断⚡</h1>
+
+<div id="box">
+  <p id="question"></p>
+
+  <button class="yes" onclick="answer(true)">はい</button>
+  <button class="no" onclick="answer(false)">いいえ</button>
+
+  <p id="result"></p>
+  <p id="character"></p>
+</div>
 
 <script>
-function check() {
-  const results = [
-    "モテ度90%！めっちゃモテる",
-    "モテ度70%！普通に人気",
-    "モテ度50%！これからや",
-    "モテ度30%！伸びしろあり"
-  ];
-  const random = Math.floor(Math.random() * results.length);
-  document.getElementById("result").innerText = results[random];
+const questions = [
+  "好きな人に自分からLINEできる？",
+  "異性に『可愛い・かっこいい』って言われたことある？",
+  "正直、自分はそこそこイケてると思う？",
+  "過去に2人以上から同時に好かれたことある？",
+  "浮気されたことある？",
+  "異性と2人で遊ぶの普通？",
+  "ぶっちゃけモテる友達より自分の方が上だと思う？",
+  "夜中に異性と電話したことある？"
+];
+
+let current = 0;
+let score = 0;
+
+function showQuestion() {
+  document.getElementById("question").innerText = questions[current];
 }
+
+function answer(ans) {
+  if (ans) score++;
+  current++;
+
+  if (current < questions.length) {
+    showQuestion();
+  } else {
+    showResult();
+  }
+}
+
+function showResult() {
+  let resultText = "";
+  let characterText = "";
+
+  if (score >= 6) {
+    resultText = "モテ度90%🔥 もう無双してる";
+    characterText = "🐰✨『フフ…君、完全に恋愛強者だね』";
+  } else if (score >= 4) {
+    resultText = "モテ度70%😎 普通に人気者";
+    characterText = "🐰🎩『いいね…あと少しでトップ層だ』";
+  } else if (score >= 2) {
+    resultText = "モテ度50%🙂 まだ伸びる";
+    characterText = "🐰🔮『君の魅力、まだ眠ってるよ』";
+  } else {
+    resultText = "モテ度30%🥶 改善の余地あり";
+    characterText = "🐰💭『…今からでも変われるさ』";
+  }
+
+  document.getElementById("question").innerText = "";
+  document.getElementById("result").innerText = resultText;
+  document.getElementById("character").innerText = characterText;
+}
+
+showQuestion();
 </script>
 
 </body>
