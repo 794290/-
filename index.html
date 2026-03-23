@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>モテ度診断</h1>
+<button onclick="check()">診断する</button>
+<p id="result"></p>
+
+<script>
+function check() {
+  const results = [
+    "モテ度90%！めっちゃモテる",
+    "モテ度70%！普通に人気",
+    "モテ度50%！これからや",
+    "モテ度30%！伸びしろあり"
+  ];
+  const random = Math.floor(Math.random() * results.length);
+  document.getElementById("result").innerText = results[random];
+}
+</script>
+
+</body>
+</html>
